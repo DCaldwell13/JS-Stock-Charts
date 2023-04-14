@@ -22,8 +22,40 @@
             <h1 class="display-2">3. Average Stock Price</h1>
             <canvas id="average-price-chart" ></canvas>
         </div>
+        <div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const Chart = document.getElementById('myChart');
+  let timeChartCanvas;
+  stocks.forEach(stock => stock.value.reverse())
+
+  new Chart(timeChartCanvas.getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: stocks[0].values.map(value => value.datetime),
+        datasets: stocks.map( stock => ({
+            label: stock.meta.symbol,
+            data: stock.values.map(value => parseFloat(value.high)),
+            backgroundColor:  getColor(stock.meta.symbol),
+            borderColor: getColor(stock.meta.symbol),
+        }))
+    }
+});
+
+
+
+
+console.log(stocks[0].values)                                                  
+
+</script>
+
     </div>
     <!-- Our JavaScript Code  -->
+    <script src="https://github.com/evzaboun/twelvedata.git"></script>
     <script src="mockData.js"></script>
     <script src="index.js"></script>
 </body>
